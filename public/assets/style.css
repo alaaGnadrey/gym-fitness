@@ -1,0 +1,30 @@
+body {
+  /**bootstrap override*/
+  /*-------------------*/ }
+  body main {
+    min-height: 600px; }
+  body .table > tbody > tr > td, body .table > tbody > tr > th, body .table > tfoot > tr > td, body .table > tfoot > tr > th, body .table > thead > tr > td, body .table > thead > tr > th {
+    padding: 20px; }
+  body .logo {
+    width: 30px;
+    height: 30px; }
+  body .logo-title {
+    font-size: x-large;
+    margin-top: 5px; }
+  body form .requiredStart {
+    color: red; }
+  body form input.ng-invalid {
+    border-color: red; }
+  body .clientContainer {
+    padding-top: 10px; }
+    body .clientContainer .userIcon {
+      font-size: 100px;
+      padding: 5px; }
+  body .activeStatus {
+    font-weight: bold; }
+    body .activeStatus.status_0 {
+      color: green; }
+    body .activeStatus.status_1 {
+      color: yellow; }
+    body .activeStatus.status_2 {
+      color: red; }

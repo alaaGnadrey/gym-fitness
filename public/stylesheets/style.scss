@@ -1,0 +1,50 @@
+body {
+
+	main{
+		min-height: 600px; 
+	}
+	
+	/**bootstrap override*/
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+		padding:20px;
+	 }
+	/*-------------------*/
+    .logo{
+    width:30px;
+    height:30px;
+    }
+    .logo-title{
+    	font-size:x-large;
+    	margin-top: 5px;
+     }
+	 form{
+     	.requiredStart{
+     		color:red;
+     	}
+     	input.ng-invalid {
+    		border-color: red;
+  		}
+     }
+	 
+     .clientContainer{
+		 padding-top: 10px;
+     	.userIcon{
+     		font-size:100px;
+     		padding:5px;
+     	}
+	 }
+	 .activeStatus{
+		 font-weight: bold;
+		 &.status_0{
+			 color: green;
+		 }
+		 &.status_1{
+			 color: yellow;
+		 }
+		 &.status_2{
+			 color: red;
+		 }
+	 }
+}
+
+

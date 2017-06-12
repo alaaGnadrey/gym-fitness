@@ -1,0 +1,90 @@
+
+'use strict';
+
+(function () {
+   var app=app||angular.module('gymFitness');
+   app.service('paymentsDataService', ['$http','restApi','$q',
+		function ($http,restApi,$q) {
+		        var context = this;
+		        var newPayment=function(){
+		        	return{
+		        		fromDate:new Date(),
+		        		toDate:new Date(),
+		        		amount:0,
+		        	};
+		        };
+		        
+		        //CRUD
+		        var add=function(payment){
+		        	var deferred = $q.defer();
+						$http.post(restApi.payment, payment).success(function(data){
+    						deferred.resolve(data);
+  						}).error(function(msg, code) {
+          					deferred.reject(msg);
+       					});		
+
+		        	return deferred.promise;
+		        };
+
+		        var update=function(payment){
+		        	var deferred = $q.defer();
+						$http.put(restApi.payment +"/" + payment._id, payment).success(function(data){
+    						deferred.resolve(data);
+  						}).error(function(msg, code) {
+          					deferred.reject(msg);
+       					});		
+
+		        	return deferred.promise;
+		        };
+
+		        var get=function(id){
+		        	var deferred = $q.defer();
+		        	var requestUrl= restApi.payment;
+		        	requestUrl=id ? requestUrl +"/" + id : requestUrl;
+
+						$http.get(requestUrl).success(function(data){
+							if(data){
+								if(data.length){
+									for(var i=0;i<data.length;i++)	
+									{
+										handleDateValues(data[i]);	
+									}
+								}else{
+									handleDateValues(data);
+								}
+							}
+
+    						deferred.resolve(data);
+  						}).error(function(msg, code) {
+          					deferred.reject(msg);
+       					});		
+
+		        	return deferred.promise;
+		        };
+
+		         var remove=function(id){
+		        	var deferred = $q.defer();
+						$http.delete(restApi.payment +"/" + id).success(function(data){
+    						deferred.resolve(data);
+  						}).error(function(msg, code) {
+          					deferred.reject(msg);
+       					});		
+
+		        	return deferred.promise;
+		        };
+
+		        var handleDateValues=function(payment){
+		        		payment.birthday=new Date(payment.birthday);
+		        };
+
+		        return {
+		        	newPayment:newPayment,
+		        	add:add,
+		        	get:get,
+		        	update:update,
+		        	remove:remove
+		        };
+		}
+   	]);
+   
+})();
