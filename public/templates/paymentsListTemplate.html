@@ -1,20 +1,25 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>מ חודש</th>
-      <th>עד לחודש</th>
-      <th>שולם בתאריך</th>
-      <th>סכום</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="payment in paymentsCollection" ng-click="editPayment(payment)" >
-      <td>{{payment._id}}</td>
-      <td>{{payment.fromDate | dateFormat }}</td>
-      <td>{{payment.toDate | dateFormat }}</td>
-      <td>{{payment.createDate | dateFormat}}</td>
-      <td>{{payment.amount }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="panel">
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>מ חודש</th>
+            <th>עד לחודש</th>
+            <th>שולם בתאריך</th>
+            <th>סכום</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="payment in paymentsCollection" ng-click="editPayment(payment)" >
+            <td>{{payment.fromDate | dateFormat }}</td>
+            <td>{{payment.toDate | dateFormat }}</td>
+            <td>{{payment.createDate | dateFormat}}</td>
+            <td>{{payment.amount }}</td>
+          </tr>
+        </tbody>
+      </table>
+     </div>
+  <!-- /.table-responsive -->
+  </div>
+</div>

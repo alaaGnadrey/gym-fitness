@@ -1,30 +1,35 @@
-<table class="table  table-striped table-hover">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>שם פרטי</th>
-      <th>שם משפחה</th>
-      <th>ת"ז</th>
-      <th>תאריך לידה</th>
-      <th>כתובת</th>
-      <th>טלפון 1</th>
-      <th>טלפון 2</th>
-      <th>הצטרפות</th>
-      <th>סטטוס</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="user in clientsCollection" ng-click="editClient(user)" >
-      <td>{{user._id}}</td>
-      <td>{{user.fname}}</td>
-      <td>{{user.lname}}</td>
-      <td>{{user.identity}}</td>
-      <td>{{user.birthday | dateFormat }}</td>
-      <td>{{user.address}}</td>
-      <td>{{user.phone1}}</td>
-      <td>{{user.phone2}}</td>
-      <td>{{user.registerDate | dateFormat }}</td>
-      <td class="activeStatus status_{{user.status}}">{{user.status | activeStatus }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="panel">
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>שם פרטי</th>
+            <th>שם משפחה</th>
+            <th>ת"ז</th>
+            <th>תאריך לידה</th>
+            <th>כתובת</th>
+            <th>טלפון 1</th>
+            <th>טלפון 2</th>
+            <th>הצטרפות</th>
+            <th>סטטוס</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in clientsCollection" ng-click="editClient(user)" >
+            <td>{{user.fname}}</td>
+            <td>{{user.lname}}</td>
+            <td>{{user.identity}}</td>
+            <td>{{user.birthday | dateFormat }}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.phone1}}</td>
+            <td>{{user.phone2}}</td>
+            <td>{{user.registerDate | dateFormat }}</td>
+            <td class="activeStatus status_{{user.status}}">{{user.status | activeStatus }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <!-- /.table-responsive -->
+  </div>
+</div>
