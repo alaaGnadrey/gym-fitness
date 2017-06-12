@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/headLib %>
+    <% include partials/head %>
+</head>
+<body ng-app="gymFitness" >
+  <div id="wrapper" ng-controller="paymentsCtrl"  ng-init="init('<%= clientId%>','<%= paymentId%>')">
+    <header>
+        <% include partials/header %>
+    </header>
+
+    <main>
+        <div id="page-wrapper">
+          <div class="paymentContainer">
+            <h2>תשלום נוכחי</h2>
+            <form name="form" class="" novalidate>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <span ng-show="form.$submitted || form.fromDate.$touched">
+                      <span class="requiredStart" ng-show="form.fromDate.$error.required">*</span>
+                    </span>
+                    <label for="fromDate" >עבור חודש</label>
+                    <input class="form-control" moment-picker min-view="year" max-view="year" ng-model="payment.fromDate" format="L" placeholder="{{DATE_FORMAT}}" readonly="true"  required="" name="fromDate" id="fromDate">
+                  </div>
+                  
+                  <div class="form-group col-md-3">
+                    <span ng-show="form.$submitted || form.toDate.$touched">
+                      <span class="requiredStart" ng-show="form.toDate.$error.required">*</span>
+                    </span>
+                    <label for="toDate" >עד לחודש</label>
+                    <input class="form-control" moment-picker min-view="year" max-view="year" ng-model="payment.toDate" format="L" placeholder="{{DATE_FORMAT}}" readonly="true"  required="" name="toDate" id="toDate">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                  <span ng-show="form.$submitted || form.inputAmount.$touched">
+                      <span class="requiredStart" ng-show="form.inputAmount.$error.required">*</span>
+                    </span>
+                    <label for="inputAmount">סכום</label>
+                    <input type="text" required=""  maxlength="5" numbers-only class="form-control" id="inputAmount" placeholder="סכום" ng-model="payment.amount"/>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <input type="submit" value="שמור" class="btn btn-primary col-md-12" ng-click="savePayment(form)" />
+                  </div>
+                  <div class="form-group col-md-3" ng-show="payment._id">
+                    <a class="btn btn-primary col-md-12" href="/clients/{{clientId}}/payments" >
+                      <span class="glyphicon glyphicon-plus" ></span>
+                      תשלום חדש 
+                    </a>
+                  </div>
+                </div>
+              </form>
+            <div>
+
+            <br/>
+            <h2>תשלומים קודמים</h2>
+            <div>
+              <payments-list client-id="clientId"></payments-list>
+            <div>
+        </div>
+    </main>
+  </div><!-- /wrapper -->
+   <% include partials/toaster %>
+  <footer>
+    <% include partials/footer %>
+  </footer>
+</body>
+</html>

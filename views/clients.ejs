@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/headLib %>
+    <% include partials/head %>
+</head>
+<body  ng-app="gymFitness" >
+  <div id="wrapper" ng-controller="clientsCtrl" ng-init="init('<%= clientId%>')">
+    <header>
+      <% include partials/header %>
+    </header>
+
+    <main>
+      <div id="page-wrapper">
+        <div class="clientContainer">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="userIcon fa fa-user fa-fw panel panel-default"></div>
+            </div>
+          </div>
+          <form name="form" class="" novalidate>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <span ng-show="form.$submitted || form.inputfname.$touched">
+                  <span class="requiredStart" ng-show="form.inputfname.$error.required">*</span>
+                </span>
+                <label for="inputfname" >שם פרטי</label>
+                <input type="text" maxlength="20" required="" class="form-control" name="inputfname" id="inputfname" placeholder="שם פרטי" ng-model="client.fname" />
+              </div>
+              <div class="form-group col-md-3 col-md-offset-1">
+              <span ng-show="form.$submitted || form.inputlname.$touched">
+                  <span class="requiredStart" ng-show="form.inputlname.$error.required">*</span>
+                </span>
+                <label for="inputlname">שם משפחה</label>
+                <input type="text" maxlength="20" required="" class="form-control" name="inputlname" id="inputlname" placeholder="שם משפחה" ng-model="client.lname"/>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label for="inputIdentity">ת"ז</label>
+                <input type="text"  maxlength="9" numbers-only class="form-control" id="inputIdentity" placeholder='ת"ז' ng-model="client.identity"/>
+              </div>
+              <div class="form-group col-md-3 col-md-offset-1">
+                <label for="inputBirthday">תאריך לידה</label>
+                <input class="form-control" moment-picker min-view="year" max-view="month" ng-model="client.birthday" format="L" placeholder="{{DATE_FORMAT}}" readonly="true" >
+              </div>
+            </div>
+            
+            <div class="row">
+            <div class="form-group col-md-3">
+                <span ng-show="form.$submitted || form.inputPhone1.$touched">
+                  <span class="requiredStart" ng-show="form.inputPhone1.$error.required">*</span>
+                </span>
+              <label for="inputPhone1">טלפון 1</label>
+              <input type="text" minlength="9" maxlength="10" numbers-only required="" class="form-control" name="inputPhone1" id="inputPhone1" placeholder="טלפון 1" ng-model="client.phone1"/>
+            </div>
+            <div class="form-group col-md-3 col-md-offset-1">
+              <label for="inputPhone2">טלפון 2</label>
+              <input type="text"  maxlength="10" numbers-only class="form-control" id="inputPhone2" placeholder="טלפון 2" ng-model="client.phone2"/>
+            </div>
+            <div class="form-group col-md-3 col-md-offset-1">
+              <label for="inputAddress">כתובת</label>
+              <input type="text" maxlength="40" class="form-control" id="inputAddress" placeholder="כתובת" ng-model="client.address"/>
+            </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-3">
+              <programs-select ng-model="client.program"></programs-select>
+              </div>
+              <div class="form-group col-md-3 col-md-offset-1">
+                <client-active-status ng-model="client.status"></client-active-status>
+              </div>
+            </div>
+
+            <br>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <input type="submit" value="שמור" class="btn btn-primary col-md-4" ng-click="saveClient(form)" />
+              
+                  <a class="btn btn-primary col-md-offset-1" href="/clients/{{client._id}}/payments" ng-show="client._id">
+                  <span class="glyphicon glyphicon-plus" ></span>
+                  תשלומים
+                  </a>
+                </div>
+            </div>
+          </form>
+        <div>
+      </div>
+    </main>
+  </div><!-- /wrapper -->
+  <% include partials/toaster %>
+  <footer>
+    <% include partials/footer %>
+  </footer>
+</body>
+</html>

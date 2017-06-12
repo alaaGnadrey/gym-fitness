@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/headLib %>
+    <link rel="stylesheet" type="text/css" href="/assets/login.css">
+    
+</head>
+<body class="loginBody" ng-app="gymFitness">
+    <main>
+         <!-- Top content -->
+        <div class="container">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong></strong></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-right">
+                        			<h3>כניסה לחשבון</h3>
+                            		<p>הכנס שם משתמש וסיסמה</p>
+                        		</div>
+                        		<div class="form-top-left">
+                        			<i class="fa fa-lock"></i>
+                        		</div>
+                            </div>
+                            <div class="form-bottom">
+			                    <form role="form" action="/login" method="post" class="login-form">
+			                    	<div class="form-group">
+			                    		<label class="sr-only" for="username">Username</label>
+			                        	<input type="text" name="username" placeholder="משתמש..." class="form-username form-control" id="username">
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="password">Password</label>
+			                        	<input type="password" name="password" placeholder="סיסמה..." class="form-password form-control" id="password">
+			                        </div>
+                                    <!-- show any messages that come back with authentication -->
+                                    <% if (message.length) { %>
+                                        <div class="invalid"><%= message %></div>
+                                    <% } %>
+			                        <button type="submit" class="btn">כניסה!</button>
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p class="text-center text-muted">Copyright {{ $root.COPYRIGHT_YEAR }} GYM & Fitness ©</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/headLib %>
+    <% include ../partials/head %>
+</head>
+<body ng-app="gymFitness" >
+  <div id="wrapper"  ng-controller="nonepaymentsReportCtrl">
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+      <div id="page-wrapper">
+        <div class="reportContainer nonePaymentReportContainer">
+            <form name="form" class="" novalidate>
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <span ng-show="form.$submitted || form.fromDate.$touched">
+                      <span class="requiredStart" ng-show="form.fromDate.$error.required">*</span>
+                    </span>
+                    <label for="fromDate" >מ חודש</label>
+                    <input class="form-control" moment-picker min-view="year" max-view="year" ng-model="fromDate" format="L" placeholder="{{DATE_FORMAT}}" readonly="true"  required="" name="fromDate" id="fromDate">
+                  </div>
+                  
+                  <div class="form-group col-md-3">
+                    <span ng-show="form.$submitted || form.toDate.$touched">
+                      <span class="requiredStart" ng-show="form.toDate.$error.required">*</span>
+                    </span>
+                    <label for="toDate" >עד לחודש</label>
+                    <input class="form-control" moment-picker min-view="year" max-view="year" ng-model="toDate" format="L" placeholder="{{DATE_FORMAT}}" readonly="true"  required="" name="toDate" id="toDate">
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <input type="submit" value="חשב" class="btn btn-primary col-md-4" ng-click="execute(form)" />
+                  </div>
+                </div>
+            </form>
+
+		    <br>
+         <div class="row reportResults">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>שם פרטי</th>
+                <th>שם משפחה</th>
+                <th>הצטרפות</th>
+                <th>סטטוס</th>
+                <th>אי תשלום עבור חודש</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in clients" >
+                <td>{{user._id}}</td>
+                <td>{{user.fname}}</td>
+                <td>{{user.lname}}</td>
+                <td>{{user.registerDate | dateFormat}}</td>
+                <td class="activeStatus status_{{user.status}}">{{user.status | activeStatus }}</td>
+                <td>
+                  <div ng-repeat="item in user.missingPayments track by $index">
+                    {{ item | dateFormat:'MM/YYYY' }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         </div>
+        <div>
+      </div>
+    </main>
+  </div><!-- /wrapper -->
+  <% include ../partials/toaster %>
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>
