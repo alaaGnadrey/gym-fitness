@@ -58,7 +58,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="user in clients" >
-                      <td>{{user._id}}</td>
+                      <td><a class="" ng-href="{{getUserPaymentsUrl(user._id)}}" ng-show="user._id"> {{user._id}}</a></td>
                       <td>{{user.fname}}</td>
                       <td>{{user.lname}}</td>
                       <td>{{user.registerDate | dateFormat}}</td>

@@ -3,7 +3,7 @@
 
 (function () {
 	var app=app||angular.module('gymFitness');
-	app.controller('nonepaymentsReportCtrl', ['$scope','reportsDataService','navigatorService','DATE_FORMAT','dateService','appMessages','toaster',function($scope,reportsDataService,navigatorService,DATE_FORMAT,dateService,appMessages,toaster){
+	app.controller('nonepaymentsReportCtrl', ['$scope','reportsDataService','navigatorService','DATE_FORMAT','dateService','appMessages','appPages','toaster',function($scope,reportsDataService,navigatorService,DATE_FORMAT,dateService,appMessages,appPages,toaster){
 		  $scope.DATE_FORMAT=DATE_FORMAT;
 		  $scope.clients=[];
 		  $scope.fromDate=dateService.getDate();
@@ -33,7 +33,12 @@
 				}else{
 						toaster.error(appMessages.loadError);
 				}
-			}};
+			}
+		  };
+
+		  $scope.getUserPaymentsUrl=function(userId){
+			return appPages.clients+"/"+userId+appPages.payments;
+		  }
 
 			function diffByMonthes(fromDate,toDate){
 				var tempFromDate=dateService.getDate(fromDate.toString());		

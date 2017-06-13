@@ -80,7 +80,7 @@
               <div class="form-group col-md-4">
                 <input type="submit" value="שמור" class="btn btn-primary col-md-4" ng-click="saveClient(form)" />
               
-                  <a class="btn btn-primary col-md-offset-1" href="/clients/{{client._id}}/payments" ng-show="client._id">
+                  <a class="btn btn-primary col-md-offset-1" ng-href="{{getUserPaymentsUrl(client._id)}}" ng-show="client._id">
                   <span class="glyphicon glyphicon-plus" ></span>
                   תשלומים
                   </a>

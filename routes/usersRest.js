@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports =function(passport){
+module.exports =function(passport,routesMiddleware){
 
   /*
   router.post('/login',function(req, res, next) {

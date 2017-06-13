@@ -4,8 +4,10 @@ var mongoose = require('mongoose');
 var clientModel = mongoose.model('Client');
 var paymentModel = mongoose.model('Payment');
 
+module.exports = function(passport,routesMiddleware){
+
 /* GET all client listing. */
-router.get('/', function(req, res, next) {
+router.get('/',routesMiddleware.isLoggedIn, function(req, res, next) {
  clientModel.find(function(err, clients){
     if(err){ return next(err); }
 
@@ -14,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST  new client  and save. */
- router.post('/', function(req, res, next) {
+ router.post('/',routesMiddleware.isLoggedIn, function(req, res, next) {
   var client = new clientModel(req.body);
 
   client.save(function(err, post){
@@ -38,12 +40,12 @@ router.get('/', function(req, res, next) {
 });
 
 /* get specific client by id */
-router.get('/:clientId', function(req, res) {
+router.get('/:clientId',routesMiddleware.isLoggedIn, function(req, res) {
   res.json(req.client);
 });
 
 /* get specific client by id */
-router.put('/:clientId', function(req, res) {
+router.put('/:clientId',routesMiddleware.isLoggedIn, function(req, res) {
 
 	req.client.fname=req.body.fname;
 	req.client.lname=req.body.lname;
@@ -80,7 +82,7 @@ router.put('/:clientId', function(req, res) {
 });
 
 /* GET all client payments. */
-router.get('/:clientId/payment', function(req, res, next) {
+router.get('/:clientId/payment',routesMiddleware.isLoggedIn, function(req, res, next) {
 
   clientModel.findById(req.client._id)
   .populate('payments')
@@ -91,12 +93,12 @@ router.get('/:clientId/payment', function(req, res, next) {
 });
 
 /* GET a client specific payment. */
-router.get('/:clientId/payment/:paymentId', function(req, res, next) {
+router.get('/:clientId/payment/:paymentId',routesMiddleware.isLoggedIn, function(req, res, next) {
   res.json(req.payment);  
 });
 
 
-router.post('/:clientId/payment', function(req, res, next) {
+router.post('/:clientId/payment',routesMiddleware.isLoggedIn, function(req, res, next) {
   var payment = new paymentModel(req.body);
   payment.client = req.client;
 
@@ -113,7 +115,7 @@ router.post('/:clientId/payment', function(req, res, next) {
 });
 
 /* get specific client by id */
-router.put('/:clientId/payment/:paymentId', function(req, res) {
+router.put('/:clientId/payment/:paymentId',routesMiddleware.isLoggedIn, function(req, res) {
 
   req.payment.fromDate=req.body.fromDate;
   req.payment.toDate=req.body.toDate;
@@ -128,4 +130,5 @@ router.put('/:clientId/payment/:paymentId', function(req, res) {
 });
 
 
-module.exports = router;
+  return router;
+}

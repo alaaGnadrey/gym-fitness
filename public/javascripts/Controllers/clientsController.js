@@ -32,6 +32,10 @@
 			}
 		  };
 
+		  $scope.getUserPaymentsUrl=function(clientId){
+			return appPages.clients+"/"+clientId+appPages.payments;
+		  };
+
 		  var setNewClient=function(){
 			$scope.client= clientDataService.newClient();
 		  };

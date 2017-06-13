@@ -454,6 +454,10 @@
 			}
 		  };
 
+		  $scope.getUserPaymentsUrl=function(clientId){
+			return appPages.clients+"/"+clientId+appPages.payments;
+		  };
+
 		  var setNewClient=function(){
 			$scope.client= clientDataService.newClient();
 		  };
@@ -549,7 +553,65 @@
 
 (function () {
 	var app=app||angular.module('gymFitness');
-	app.controller('nonepaymentsReportCtrl', ['$scope','reportsDataService','navigatorService','DATE_FORMAT','dateService','appMessages','toaster',function($scope,reportsDataService,navigatorService,DATE_FORMAT,dateService,appMessages,toaster){
+	app.controller('loginCtrl', ['$scope', '$location', 'authService','appMessages',function($scope, $location, authService,appMessages){
+	    $scope.login = function () {
+            // initial values
+            $scope.error = false;
+            $scope.disabled = true;
+
+            // call login from service
+            authService.login($scope.loginForm.username, $scope.loginForm.password)
+                // handle success
+                .then(function () {
+                    $location.path('/');
+                    $scope.disabled = false;
+                    $scope.loginForm = {};
+                })
+                // handle error
+                .catch(function () {
+                    $scope.error = true;
+                    $scope.errorMessage =appMessages.invalidUsernameOrPassword;
+                    $scope.disabled = false;
+                    $scope.loginForm = {};
+                });
+        };
+	}]);
+})(); 
+
+'use strict';
+
+(function () {
+	var app=app||angular.module('gymFitness');
+	app.controller('logoutCtrl', ['$scope', '$location', 'authService','appMessages',function($scope, $location, authService,appMessages){
+		  $scope.login = function () {
+        // initial values
+        $scope.error = false;
+        $scope.disabled = true;
+
+        // call login from service
+        authService.login($scope.loginForm.username, $scope.loginForm.password)
+          // handle success
+          .then(function () {
+            $location.path('/');
+            $scope.disabled = false;
+            $scope.loginForm = {};
+          })
+          // handle error
+          .catch(function () {
+            $scope.error = true;
+            $scope.errorMessage =appMessages.invalidUsernameOrPassword;
+            $scope.disabled = false;
+            $scope.loginForm = {};
+          });
+      };
+	}]);
+})(); 
+
+'use strict';
+
+(function () {
+	var app=app||angular.module('gymFitness');
+	app.controller('nonepaymentsReportCtrl', ['$scope','reportsDataService','navigatorService','DATE_FORMAT','dateService','appMessages','appPages','toaster',function($scope,reportsDataService,navigatorService,DATE_FORMAT,dateService,appMessages,appPages,toaster){
 		  $scope.DATE_FORMAT=DATE_FORMAT;
 		  $scope.clients=[];
 		  $scope.fromDate=dateService.getDate();
@@ -579,7 +641,12 @@
 				}else{
 						toaster.error(appMessages.loadError);
 				}
-			}};
+			}
+		  };
+
+		  $scope.getUserPaymentsUrl=function(userId){
+			return appPages.clients+"/"+userId+appPages.payments;
+		  }
 
 			function diffByMonthes(fromDate,toDate){
 				var tempFromDate=dateService.getDate(fromDate.toString());		
@@ -634,64 +701,6 @@
 					}
 				}
 			};
-	}]);
-})(); 
-
-'use strict';
-
-(function () {
-	var app=app||angular.module('gymFitness');
-	app.controller('loginCtrl', ['$scope', '$location', 'authService','appMessages',function($scope, $location, authService,appMessages){
-	    $scope.login = function () {
-            // initial values
-            $scope.error = false;
-            $scope.disabled = true;
-
-            // call login from service
-            authService.login($scope.loginForm.username, $scope.loginForm.password)
-                // handle success
-                .then(function () {
-                    $location.path('/');
-                    $scope.disabled = false;
-                    $scope.loginForm = {};
-                })
-                // handle error
-                .catch(function () {
-                    $scope.error = true;
-                    $scope.errorMessage =appMessages.invalidUsernameOrPassword;
-                    $scope.disabled = false;
-                    $scope.loginForm = {};
-                });
-        };
-	}]);
-})(); 
-
-'use strict';
-
-(function () {
-	var app=app||angular.module('gymFitness');
-	app.controller('logoutCtrl', ['$scope', '$location', 'authService','appMessages',function($scope, $location, authService,appMessages){
-		  $scope.login = function () {
-        // initial values
-        $scope.error = false;
-        $scope.disabled = true;
-
-        // call login from service
-        authService.login($scope.loginForm.username, $scope.loginForm.password)
-          // handle success
-          .then(function () {
-            $location.path('/');
-            $scope.disabled = false;
-            $scope.loginForm = {};
-          })
-          // handle error
-          .catch(function () {
-            $scope.error = true;
-            $scope.errorMessage =appMessages.invalidUsernameOrPassword;
-            $scope.disabled = false;
-            $scope.loginForm = {};
-          });
-      };
 	}]);
 })(); 
 'use strict';

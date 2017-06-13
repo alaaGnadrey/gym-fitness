@@ -16,6 +16,7 @@ require('./models/clients');
 require('./models/payments');
 require('./models/users');
 
+
 //Connect to our local MongoDB instance 
 mongoose.connect(configDB.url);
 
@@ -51,24 +52,24 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
-
-var routes = require('./routes/index')(passport);;
+var routesMiddleware=require('./routes/routesMiddleware');
+var routes = require('./routes/index')(passport,routesMiddleware);
+var clientRest = require('./routes/clientRest')(passport,routesMiddleware);
+var reportsRest=require('./routes/reportsRest')(passport,routesMiddleware);
 //var users = require('./routes/users');
-var usersRest=require('./routes/usersRest')(passport);
+//var usersRest=require('./routes/usersRest')(passport,routesMiddleware);
 //var clients = require('./routes/clients');
-var clientRest = require('./routes/clientRest');
 //var reports = require('./routes/reports');
-var reportsRest=require('./routes/reportsRest');
 
 
 //register routers
 app.use('/', routes);
-//app.use('/users', users);
-app.use('/usersApi',usersRest);
-//app.use('/clients', clients);
 app.use('/clientApi',clientRest);
-//app.use('/reports',reports);
 app.use('/reportsApi',reportsRest);
+//app.use('/users', users);
+//app.use('/usersApi',usersRest);
+//app.use('/clients', clients);
+//app.use('/reports',reports)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
