@@ -13,10 +13,15 @@
 
         var getAllClients=function(){
             clientDataService.get().then(function(data){
-                    $scope.clientsCollection = data;
+                    $scope.clientsCollection = data;             
+                    window.setTimeout(function(){
+                    $('#dataTables-example').dataTable({
+                        "language":{url:"/assets/sb-admin/js/jquery/Hebrew.json"}
+                    });
+                    },2000);
             },function(errorMsg){
 
-            });
+            }); 
         };
 
         var init=function(){ 
@@ -37,7 +42,7 @@
             replace: true,
             controller: ['$scope','clientDataService','navigatorService','appPages','DATE_FORMAT', clientsListController],
             link: function (scope, element, attrs, ngModel) {
-
+                    scope.element=element;
             }
         };
     }]);
