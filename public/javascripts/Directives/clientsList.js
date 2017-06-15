@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-    var clientsListController = function ($scope,clientDataService,navigatorService,appPages,DATE_FORMAT) {
+    var clientsListController = function ($scope,clientDataService,navigatorService,appPages,DATE_FORMAT,DTOptionsBuilder) {
+        
         $scope.clientsCollection=[];
         $scope.DATE_FORMAT=DATE_FORMAT;
         $scope.editClient=function(selectedClient){
@@ -10,15 +11,12 @@
                 navigatorService.navigateTo(editUrl);
             }
         };
+        $scope.dtOptions=DTOptionsBuilder.newOptions()
+                        .withLanguageSource("/assets/sb-admin/js/jquery/Hebrew.json");
 
         var getAllClients=function(){
             clientDataService.get().then(function(data){
                     $scope.clientsCollection = data;             
-                    window.setTimeout(function(){
-                    $('#dataTables-example').dataTable({
-                        "language":{url:"/assets/sb-admin/js/jquery/Hebrew.json"}
-                    });
-                    },2000);
             },function(errorMsg){
 
             }); 
@@ -40,7 +38,7 @@
             templateUrl: "/templates/clientsListTemplate.html",
             scope: {},
             replace: true,
-            controller: ['$scope','clientDataService','navigatorService','appPages','DATE_FORMAT', clientsListController],
+            controller: ['$scope','clientDataService','navigatorService','appPages','DATE_FORMAT','DTOptionsBuilder', clientsListController],
             link: function (scope, element, attrs, ngModel) {
                     scope.element=element;
             }
