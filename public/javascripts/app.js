@@ -1,4 +1,4 @@
-var app = angular.module('gymFitness', ['toaster', 'ngAnimate','moment-picker']);
+var app = angular.module('gymFitness', ['toaster', 'ngAnimate','moment-picker','datatables']);
 app.config(['momentPickerProvider', function (momentPickerProvider) {
         moment.locale('he');
         momentPickerProvider.options({
