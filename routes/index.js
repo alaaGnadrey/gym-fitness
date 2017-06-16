@@ -16,7 +16,16 @@ module.exports = function(passport,routesMiddleware){
   });
 
   router.get('/login', function(req, res, next) {
-    res.render('account/login', { title: 'כניסה' , message: req.flash('loginMessage') });
+    var errorMessageId=req.flash('loginMessage');
+    var errorMessageText="";
+    errorMessageId=errorMessageId.length ? errorMessageId[0]:"";
+    
+    switch(errorMessageId){
+      case 'NoUserFound' :{errorMessageText="משתמש לא קיים"; break;}
+      case 'WrongPassword' :{errorMessageText="סיסמה שגויה"; break;}
+    }
+    
+    res.render('account/login', { title: 'כניסה' , message: errorMessageText });
   });
 
     router.post('/login', passport.authenticate('local-login', {
@@ -31,35 +40,6 @@ module.exports = function(passport,routesMiddleware){
     res.redirect('/login');
   });
 
-
-  /* GET clients listing. */
-  router.get('/clients/:id?',routesMiddleware.isLoggedIn, function(req, res, next) {
-    res.render('clients', { title: 'Gym Fitness - מנויים' ,clientId: req.params.id});
-  });
-
-  /* GET client payments listing. */
-  router.get('/clients/:id/payments/:paymentId?',routesMiddleware.isLoggedIn, function(req, res, next) {
-    res.render('payments', { title: 'Gym Fitness - תשלומים' ,clientId: req.params.id,paymentId:req.params.paymentId});
-  });
-
-
-  /* none payments report */
-  router.get('/reports/nonePayments',routesMiddleware.isLoggedIn, function(req, res, next) {
-    res.render('reports/nonePaymentReport', { title: 'Gym Fitness - דוח אי תשלומים'});
-  });
-
-
-  // route middleware to make sure a user is logged in
-  function isLoggedIn(req, res, next) {
-
-      // if user is authenticated in the session, carry on 
-      if (req.isAuthenticated())
-          return next();
-
-      // if they aren't redirect them to the home page
-      res.redirect('/login');
-  }
-
   return router;
-}
+};
 

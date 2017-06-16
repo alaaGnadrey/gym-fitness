@@ -45,7 +45,7 @@ app.value('clientStatus', {
         '2':'נמחק' ,
     })
     .value('restApi', {
-        client: "/clientApi",
+        client: "/clientsApi",
         reports:"/reportsApi",
         users:"/usersApi"
     })
