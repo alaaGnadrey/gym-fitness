@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../partials/headLib %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= title %></title>
+
+ <!-- Bootstrap Core CSS -->
+    <link href="/assets/sb-admin/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+    <link href="/assets/sb-admin/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/assets/login.css">
     
 </head>
-<body class="loginBody" ng-app="gymFitness">
+<body class="loginBody">
     <main>
          <!-- Top content -->
         <div class="container">
@@ -50,7 +62,7 @@
         </div>
     </main>
     <footer>
-        <% include ../partials/footer %>
+        <p class="text-center text-muted">Copyright <%= new Date().getFullYear(); %> GYM & FITNESS PLUS ©</p>
     </footer>
 </body>
 </html>
