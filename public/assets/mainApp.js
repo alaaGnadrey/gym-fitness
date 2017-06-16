@@ -1,33 +1,4 @@
 var app = angular.module('gymFitness', ['toaster', 'ngAnimate','moment-picker','datatables']);
-app.config(['momentPickerProvider', function (momentPickerProvider) {
-        moment.locale('he');
-        momentPickerProvider.options({
-            
-            locale:        'he',
-            leftArrow:     '&rarr;',
-            rightArrow:    '&larr;' 
-            /*startView:     'year',
-            autoclose:     true,
-            today:         false,
-            keyboard:      false,
-            
-            
-            leftArrow:     '&larr;',
-            rightArrow:    '&rarr;',
-            yearsFormat:   'YYYY',
-            monthsFormat:  'MMM',
-            daysFormat:    'D',
-            hoursFormat:   'HH:[00]',
-            minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
-            secondsFormat: 'ss',
-            minutesStep:   5,
-            secondsStep:   1*/
-        });
-    }]);
-
-moment.locale('he');
- 
-
 app.value('clientStatus', {
         active: 0,
         pause: 1,
@@ -61,6 +32,33 @@ app.value('clientStatus', {
     })
     .constant('DATE_FORMAT','DD/MM/YYYY' );
     
+app.config(['momentPickerProvider', function (momentPickerProvider) {
+        moment.locale('he');
+        momentPickerProvider.options({
+            
+            locale:        'he',
+            leftArrow:     '&rarr;',
+            rightArrow:    '&larr;' 
+            /*startView:     'year',
+            autoclose:     true,
+            today:         false,
+            keyboard:      false,
+            
+            
+            leftArrow:     '&larr;',
+            rightArrow:    '&rarr;',
+            yearsFormat:   'YYYY',
+            monthsFormat:  'MMM',
+            daysFormat:    'D',
+            hoursFormat:   'HH:[00]',
+            minutesFormat: moment.localeData().longDateFormat('LT').replace(/[aA]/, ''),
+            secondsFormat: 'ss',
+            minutesStep:   5,
+            secondsStep:   1*/
+        });
+    }]);
+
+moment.locale('he');
 
 app.run(function($rootScope) {
    $rootScope.COPYRIGHT_YEAR=new window.Date().getFullYear();
