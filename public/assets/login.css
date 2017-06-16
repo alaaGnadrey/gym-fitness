@@ -142,9 +142,6 @@ body.loginBody {
     width: 100%; }
   body.loginBody .form-bottom form .input-error {
     border-color: #de995e; }
-    body.loginBody .form-bottom .invalid{
-      color: red;
-    }
   body.loginBody .social-login {
     margin-top: 35px; }
   body.loginBody .social-login h3 {
