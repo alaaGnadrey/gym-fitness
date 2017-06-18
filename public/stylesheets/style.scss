@@ -5,6 +5,19 @@ body {
 		padding-top:15px;
 		padding-bottom :15px;
 	 }
+	 .table>tbody>tr{
+		 &.selected{
+			 background-color:#cee0ed;
+			 >td{
+				 background-color:#cee0ed;
+			 }
+		 }
+	 }
+
+	.clickable{
+		cursor:pointer;
+	}
+	 
 	/*-------------------*/
     .logo{
     width:30px;

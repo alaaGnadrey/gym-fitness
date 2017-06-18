@@ -11,6 +11,12 @@
             }
         };
 
+        $scope.isSelectedPayment=function(payment){
+            if($scope.selectedPayment)
+                return $scope.selectedPayment._id==payment._id;
+            return false;
+        };
+
         var getAllPayments=function(){
             paymentsDataService.get($scope.clientId).then(function(data){
                     $scope.paymentsCollection = data;
@@ -33,7 +39,8 @@
             restrict: 'E',
             templateUrl: "/templates/paymentsListTemplate.html",
             scope: {
-                clientId:"="
+                clientId:"=",
+                selectedPayment:"="
             },
             replace: true,
             controller: ['$scope','paymentsDataService','navigatorService','appPages','DATE_FORMAT', paymentsListController],

@@ -776,7 +776,9 @@
         return {
             restrict: 'E',
             templateUrl: "/templates/clientsListTemplate.html",
-            scope: {},
+            scope: {
+                selectedClient:"="
+            },
             replace: true,
             controller: ['$scope','clientDataService','navigatorService','appPages','DATE_FORMAT','DTOptionsBuilder', clientsListController],
             link: function (scope, element, attrs, ngModel) {
@@ -825,6 +827,12 @@ app.directive('numbersOnly', function () {
             }
         };
 
+        $scope.isSelectedPayment=function(payment){
+            if($scope.selectedPayment)
+                return $scope.selectedPayment._id==payment._id;
+            return false;
+        };
+
         var getAllPayments=function(){
             paymentsDataService.get($scope.clientId).then(function(data){
                     $scope.paymentsCollection = data;
@@ -847,7 +855,8 @@ app.directive('numbersOnly', function () {
             restrict: 'E',
             templateUrl: "/templates/paymentsListTemplate.html",
             scope: {
-                clientId:"="
+                clientId:"=",
+                selectedPayment:"="
             },
             replace: true,
             controller: ['$scope','paymentsDataService','navigatorService','appPages','DATE_FORMAT', paymentsListController],

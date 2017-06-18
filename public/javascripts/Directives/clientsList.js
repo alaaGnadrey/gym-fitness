@@ -36,7 +36,9 @@
         return {
             restrict: 'E',
             templateUrl: "/templates/clientsListTemplate.html",
-            scope: {},
+            scope: {
+                selectedClient:"="
+            },
             replace: true,
             controller: ['$scope','clientDataService','navigatorService','appPages','DATE_FORMAT','DTOptionsBuilder', clientsListController],
             link: function (scope, element, attrs, ngModel) {
