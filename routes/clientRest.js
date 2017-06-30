@@ -8,7 +8,7 @@ module.exports = function(passport,routesMiddleware){
 
 /* GET all client listing. */
 router.get('/',routesMiddleware.isLoggedIn, function(req, res, next) {
- clientModel.find(function(err, clients){
+ clientModel.find({}, null, {sort: {fname: 1}},function(err, clients){
     if(err){ return next(err); }
 
     res.json(clients);
